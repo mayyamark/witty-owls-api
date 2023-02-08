@@ -1,0 +1,25 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """ID of the user"""
+  id: ID!
+
+  """User's email"""
+  email: String!
+
+  """User's first name"""
+  firstName: String
+
+  """User's last name"""
+  lastName: String
+
+  """User's role"""
+  role: String!
+}
+
+type Query {
+  findAll: User!
+  findOne: User!
+}
