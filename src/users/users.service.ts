@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,23 +12,49 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  create(createUserInput: CreateUserInput) {
-    return createUserInput;
+  async create(createUserInput: CreateUserInput): Promise<User> {
+    const user = this.userRepository.create(createUserInput);
+    return await this.userRepository.save(user);
   }
 
-  findAll() {
-    return [];
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  findOne(id: string) {
-    return {};
+  async findOne(id: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException(`User #${id} not found`);
+    }
+
+    return user;
   }
 
-  update(id: string, updateUserInput: UpdateUserInput) {
-    return { updateUserInput, id };
+  async update(id: string, updateUserInput: UpdateUserInput) {
+    const user = await this.userRepository.preload({
+      id,
+      ...updateUserInput,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User #${id} not found`);
+    }
+
+    await this.userRepository.update(id, updateUserInput);
+
+    return user;
   }
 
-  remove(id: string) {
-    return { id };
+  async remove(id: string) {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException(`User #${id} not found`);
+    }
+
+    await this.userRepository.remove(user);
+
+    return user;
   }
 }

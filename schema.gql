@@ -3,8 +3,20 @@
 # ------------------------------------------------------
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """ID of the user"""
+  id: String!
+
+  """First name of the user"""
+  firstName: String!
+
+  """Last name of the user"""
+  lastName: String!
+
+  """Email of the user"""
+  email: String!
+
+  """Role of the user"""
+  role: String!
 }
 
 type Query {
@@ -15,16 +27,34 @@ type Query {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  removeUser(id: String!): User!
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """First name of the user"""
+  firstName: String!
+
+  """Last name of the user"""
+  lastName: String!
+
+  """Email of the user"""
+  email: String!
+
+  """Role of the user"""
+  role: String!
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  """First name of the user"""
+  firstName: String
+
+  """Last name of the user"""
+  lastName: String
+
+  """Email of the user"""
+  email: String
+
+  """Role of the user"""
+  role: String
+  id: String!
 }
