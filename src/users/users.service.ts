@@ -5,22 +5,22 @@ import { UpdateUserInput } from './dto/update-user.input';
 @Injectable()
 export class UsersService {
   create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+    return { exampleField: createUserInput.exampleField };
   }
 
   findAll() {
-    return `This action returns all users`;
+    return [{ exampleField: 1 }];
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return { exampleField: id };
   }
 
   update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+    return { exampleField: updateUserInput.id };
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return { exampleField: id };
   }
 }
