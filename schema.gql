@@ -2,6 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  """ID of the post"""
+  id: String!
+
+  """Title of the post"""
+  title: String!
+
+  """Text of the post"""
+  text: String!
+
+  """Author of the post"""
+  author: User!
+
+  """ID of the author"""
+  authorId: String!
+}
+
 type User {
   """ID of the user"""
   id: String!
@@ -17,17 +34,9 @@ type User {
 
   """Role of the user"""
   role: String!
-}
 
-type Post {
-  """ID of the post"""
-  id: String!
-
-  """Title of the post"""
-  title: String!
-
-  """Text of the post"""
-  text: String!
+  """List of posts, created by the user"""
+  posts: [Post!]
 }
 
 type Query {
@@ -83,6 +92,9 @@ input CreatePostInput {
 
   """Text of the post"""
   text: String!
+
+  """ID of the author of the post"""
+  authorId: String!
 }
 
 input UpdatePostInput {
@@ -91,6 +103,9 @@ input UpdatePostInput {
 
   """Text of the post"""
   text: String
+
+  """ID of the author of the post"""
+  authorId: String
 
   """ID of the post"""
   id: String!

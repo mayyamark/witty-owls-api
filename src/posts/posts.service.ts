@@ -18,7 +18,7 @@ export class PostsService {
   }
 
   async findAll(): Promise<Post[]> {
-    return await this.postsRepository.find();
+    return await this.postsRepository.find({ relations: ['author'] });
   }
 
   async findOne(id: string): Promise<Post> {
