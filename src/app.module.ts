@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PostModule } from './post/post.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,6 +29,7 @@ dotenv.config();
       synchronize: true,
     }),
     UsersModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],
