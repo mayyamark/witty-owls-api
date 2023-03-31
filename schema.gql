@@ -17,6 +17,9 @@ type Post {
 
   """ID of the author"""
   authorId: String!
+
+  """Number of views"""
+  views: Int!
 }
 
 type User {
@@ -41,7 +44,7 @@ type User {
 
 type Query {
   users: [User!]!
-  user(id: Int!): User!
+  user(id: String!): User!
   posts: [Post!]!
   post(id: String!): Post!
 }

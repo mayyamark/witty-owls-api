@@ -1,4 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -31,4 +31,8 @@ export class Post {
   @Column({ name: 'authorId' })
   @Field(() => String, { description: 'ID of the author' })
   authorId: string;
+
+  @Column({ default: 0 })
+  @Field(() => Int, { description: 'Number of views' })
+  views: number;
 }

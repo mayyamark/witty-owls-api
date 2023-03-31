@@ -22,13 +22,19 @@ export class PostsService {
   }
 
   async findOne(id: string): Promise<Post> {
-    const user = await this.postsRepository.findOneBy({ id });
+    const post = await this.postsRepository.findOne({
+      where: { id },
+      relations: ['author'],
+    });
 
-    if (!user) {
+    if (!post) {
       throw new NotFoundException(`User #${id} not found`);
     }
 
-    return user;
+    const updatedPost = { ...post, views: post.views + 1 };
+    await this.postsRepository.update(id, updatedPost);
+
+    return updatedPost;
   }
 
   async update(id: string, updatePostInput: UpdatePostInput) {
