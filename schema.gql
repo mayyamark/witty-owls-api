@@ -19,15 +19,31 @@ type User {
   role: String!
 }
 
+type Post {
+  """ID of the post"""
+  id: String!
+
+  """Title of the post"""
+  title: String!
+
+  """Text of the post"""
+  text: String!
+}
+
 type Query {
   users: [User!]!
   user(id: Int!): User!
+  posts: [Post!]!
+  post(id: String!): Post!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: String!): Post!
 }
 
 input CreateUserInput {
@@ -56,5 +72,26 @@ input UpdateUserInput {
 
   """Role of the user"""
   role: String
+
+  """ID of the user"""
+  id: String!
+}
+
+input CreatePostInput {
+  """Title of the post"""
+  title: String!
+
+  """Text of the post"""
+  text: String!
+}
+
+input UpdatePostInput {
+  """Title of the post"""
+  title: String
+
+  """Text of the post"""
+  text: String
+
+  """ID of the post"""
   id: String!
 }
