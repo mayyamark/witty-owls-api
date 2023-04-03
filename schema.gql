@@ -58,6 +58,9 @@ type Comment {
 
   """List of reactions, associated with the comment"""
   reactions: [Reaction!]
+
+  """ID of the parent comment"""
+  parentId: String
 }
 
 type Post {
@@ -206,6 +209,9 @@ input CreateCommentInput {
 
   """ID of the author of the comment"""
   authorId: String!
+
+  """ID of the parent the comment"""
+  parentId: String
 }
 
 input UpdateCommentInput {
@@ -217,6 +223,9 @@ input UpdateCommentInput {
 
   """ID of the author of the comment"""
   authorId: String
+
+  """ID of the parent the comment"""
+  parentId: String
 
   """ID of the comment"""
   id: String!

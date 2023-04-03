@@ -46,4 +46,11 @@ export class Comment {
     nullable: true,
   })
   reactions: Reaction[];
+
+  @Column({ nullable: true })
+  @Field(() => String, {
+    description: 'ID of the parent comment',
+    nullable: true,
+  })
+  parentId?: string;
 }

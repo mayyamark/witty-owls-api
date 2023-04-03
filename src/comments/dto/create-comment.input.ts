@@ -16,4 +16,11 @@ export class CreateCommentInput {
   @Column()
   @Field(() => String, { description: 'ID of the author of the comment' })
   authorId: string;
+
+  @Column({ nullable: true })
+  @Field(() => String, {
+    description: 'ID of the parent the comment',
+    nullable: true,
+  })
+  parentId?: string;
 }
