@@ -130,6 +130,9 @@ type User {
 
   """List of reactions, made by the user"""
   reactions: [Reaction!]
+
+  """Password of the user"""
+  password: String
 }
 
 type Query {
@@ -170,6 +173,9 @@ input CreateUserInput {
 
   """Role of the user"""
   role: String!
+
+  """Password of the user"""
+  password: String!
 }
 
 input UpdateUserInput {
@@ -184,6 +190,9 @@ input UpdateUserInput {
 
   """Role of the user"""
   role: String
+
+  """Password of the user"""
+  password: String
 
   """ID of the user"""
   id: String!

@@ -8,7 +8,7 @@
 - [x] Add new comments resource
 - [x] Add new reactions resource
 - [x] Add replies to comments
-- [ ] Add createdAt and updatedAt fields to all resources
+- [x] Add createdAt and updatedAt fields to all resources
 - [ ] Add authentication
 
 ## Bonus:
