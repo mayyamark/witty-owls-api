@@ -4,8 +4,8 @@
 - [x] Setup Postgres
 - [x] Add new users resource
 - [x] Add new posts resource
-- [ ] Add new views resource - or part of posts?
-- [ ] Add new comments resource
+- [x] Add views field for posts
+- [x] Add new comments resource
 - [ ] Add new reactions resource
 - [ ] Add authentication
 

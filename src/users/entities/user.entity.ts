@@ -1,4 +1,5 @@
 import { Post } from 'src/posts/entities/post.entity';
+import { Comment } from 'src/comments/entities/comment.entity';
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
@@ -31,4 +32,11 @@ export class User {
     nullable: true,
   })
   posts: Post[];
+
+  @OneToMany(() => Comment, (comment) => comment.author)
+  @Field(() => [Comment], {
+    description: 'List of comments, created by the user',
+    nullable: true,
+  })
+  comments: Comment[];
 }

@@ -18,26 +18,33 @@ export class PostsService {
   }
 
   async findAll(): Promise<Post[]> {
-    return await this.postsRepository.find({ relations: ['author'] });
+    return await this.postsRepository.find({
+      relations: ['author', 'comments'],
+    });
   }
 
   async findOne(id: string): Promise<Post> {
     const post = await this.postsRepository.findOne({
       where: { id },
-      relations: ['author'],
+      relations: ['author', 'comments'],
     });
 
     if (!post) {
-      throw new NotFoundException(`User #${id} not found`);
+      throw new NotFoundException(`Post #${id} not found`);
     }
 
-    const updatedPost = { ...post, views: post.views + 1 };
-    await this.postsRepository.update(id, updatedPost);
+    const updatedPost = {
+      id,
+      views: post.views + 1,
+    };
 
-    return updatedPost;
+    await this.update(id, updatedPost);
+
+    return { ...post, ...updatedPost };
   }
 
   async update(id: string, updatePostInput: UpdatePostInput) {
+    console.log('HERE');
     const post = await this.postsRepository.preload({
       id,
       ...updatePostInput,

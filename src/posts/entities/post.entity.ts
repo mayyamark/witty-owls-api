@@ -1,11 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from 'src/users/entities/user.entity';
+import { Comment } from 'src/comments/entities/comment.entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -35,4 +37,11 @@ export class Post {
   @Column({ default: 0 })
   @Field(() => Int, { description: 'Number of views' })
   views: number;
+
+  @OneToMany(() => Comment, (comment) => comment.post)
+  @Field(() => [Comment], {
+    description: 'List of comments, associated with the post',
+    nullable: true,
+  })
+  comments: Comment[];
 }

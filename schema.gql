@@ -2,6 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comment {
+  """ID of the comment"""
+  id: String!
+
+  """Text content of the comment"""
+  text: String!
+
+  """ID of the author"""
+  authorId: String!
+
+  """Author of the comment"""
+  author: User!
+
+  """ID of the post"""
+  postId: String!
+
+  """Post, associated with the comment"""
+  post: Post!
+}
+
 type Post {
   """ID of the post"""
   id: String!
@@ -20,6 +40,9 @@ type Post {
 
   """Number of views"""
   views: Int!
+
+  """List of comments, associated with the post"""
+  comments: [Comment!]
 }
 
 type User {
@@ -40,6 +63,9 @@ type User {
 
   """List of posts, created by the user"""
   posts: [Post!]
+
+  """List of comments, created by the user"""
+  comments: [Comment!]
 }
 
 type Query {
@@ -47,6 +73,8 @@ type Query {
   user(id: String!): User!
   posts: [Post!]!
   post(id: String!): Post!
+  comments: [Comment!]!
+  comment(id: String!): Comment!
 }
 
 type Mutation {
@@ -56,6 +84,9 @@ type Mutation {
   createPost(createPostInput: CreatePostInput!): Post!
   updatePost(updatePostInput: UpdatePostInput!): Post!
   removePost(id: String!): Post!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: String!): Comment!
 }
 
 input CreateUserInput {
@@ -111,5 +142,33 @@ input UpdatePostInput {
   authorId: String
 
   """ID of the post"""
+  id: String!
+
+  """Number of views"""
+  views: Int!
+}
+
+input CreateCommentInput {
+  """Text of the comment"""
+  text: String!
+
+  """ID of the post, associated with the comment"""
+  postId: String!
+
+  """ID of the author of the comment"""
+  authorId: String!
+}
+
+input UpdateCommentInput {
+  """Text of the comment"""
+  text: String
+
+  """ID of the post, associated with the comment"""
+  postId: String
+
+  """ID of the author of the comment"""
+  authorId: String
+
+  """ID of the comment"""
   id: String!
 }
