@@ -2,6 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Reaction {
+  """ID of the reaction"""
+  id: String!
+
+  """Variant of the reaction"""
+  variant: ReactionVariant!
+
+  """User, that have reacted"""
+  author: User!
+
+  """ID of the user, that have reacted"""
+  authorId: String!
+
+  """Post, associated with the reaction"""
+  post: Post
+
+  """ID of the post, associated with the reaction"""
+  postId: String
+
+  """Comment, associated with the reaction"""
+  comment: Comment
+
+  """ID of the comment, associated with the reaction"""
+  commentId: String
+}
+
+"""Supported variants for a reaction"""
+enum ReactionVariant {
+  LIKE
+  LOVE
+  ANGRY
+  SAD
+  CARE
+}
+
 type Comment {
   """ID of the comment"""
   id: String!
@@ -20,6 +55,9 @@ type Comment {
 
   """Post, associated with the comment"""
   post: Post!
+
+  """List of reactions, associated with the comment"""
+  reactions: [Reaction!]
 }
 
 type Post {
@@ -43,6 +81,9 @@ type Post {
 
   """List of comments, associated with the post"""
   comments: [Comment!]
+
+  """List of reactions, associated with the user"""
+  reactions: [Reaction!]
 }
 
 type User {
@@ -66,6 +107,9 @@ type User {
 
   """List of comments, created by the user"""
   comments: [Comment!]
+
+  """List of reactions, made by the user"""
+  reactions: [Reaction!]
 }
 
 type Query {
@@ -75,6 +119,8 @@ type Query {
   post(id: String!): Post!
   comments: [Comment!]!
   comment(id: String!): Comment!
+  reactions: [Reaction!]!
+  reaction(id: String!): Reaction!
 }
 
 type Mutation {
@@ -87,6 +133,9 @@ type Mutation {
   createComment(createCommentInput: CreateCommentInput!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   removeComment(id: String!): Comment!
+  createReaction(createReactionInput: CreateReactionInput!): Reaction!
+  updateReaction(updateReactionInput: UpdateReactionInput!): Reaction!
+  removeReaction(id: String!): Reaction!
 }
 
 input CreateUserInput {
@@ -170,5 +219,36 @@ input UpdateCommentInput {
   authorId: String
 
   """ID of the comment"""
+  id: String!
+}
+
+input CreateReactionInput {
+  """Variant of the reaction"""
+  variant: ReactionVariant!
+
+  """ID of the post, associated with the comment"""
+  postId: String
+
+  """ID of the comment, associated with the comment"""
+  commentId: String
+
+  """ID of the user, that have reacted"""
+  authorId: String!
+}
+
+input UpdateReactionInput {
+  """Variant of the reaction"""
+  variant: ReactionVariant
+
+  """ID of the post, associated with the comment"""
+  postId: String
+
+  """ID of the comment, associated with the comment"""
+  commentId: String
+
+  """ID of the user, that have reacted"""
+  authorId: String
+
+  """ID of the reaction"""
   id: String!
 }

@@ -9,6 +9,7 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
+import { Reaction } from 'src/reactions/entities/reaction.entity';
 
 @Entity()
 @ObjectType()
@@ -44,4 +45,11 @@ export class Post {
     nullable: true,
   })
   comments: Comment[];
+
+  @OneToMany(() => Reaction, (reaction) => reaction.post)
+  @Field(() => [Reaction], {
+    description: 'List of reactions, associated with the user',
+    nullable: true,
+  })
+  reactions: Reaction[];
 }

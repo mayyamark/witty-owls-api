@@ -7,6 +7,8 @@
 - [x] Add views field for posts
 - [x] Add new comments resource
 - [ ] Add new reactions resource
+- [ ] Add replies to comments
+- [ ] Add createdAt and updatedAt fields to all resources
 - [ ] Add authentication
 
 ## Bonus:

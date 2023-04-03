@@ -19,14 +19,14 @@ export class CommentsService {
 
   async findAll(): Promise<Comment[]> {
     return await this.commentsRepository.find({
-      relations: ['author', 'post'],
+      relations: ['author', 'post', 'reactions'],
     });
   }
 
   async findOne(id: string): Promise<Comment> {
     const comment = await this.commentsRepository.findOne({
       where: { id },
-      relations: ['author', 'post'],
+      relations: ['author', 'post', 'reactions'],
     });
 
     if (!comment) {

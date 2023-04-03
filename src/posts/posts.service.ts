@@ -19,14 +19,14 @@ export class PostsService {
 
   async findAll(): Promise<Post[]> {
     return await this.postsRepository.find({
-      relations: ['author', 'comments'],
+      relations: ['author', 'comments', 'reactions'],
     });
   }
 
   async findOne(id: string): Promise<Post> {
     const post = await this.postsRepository.findOne({
       where: { id },
-      relations: ['author', 'comments'],
+      relations: ['author', 'comments', 'reactions'],
     });
 
     if (!post) {
@@ -44,7 +44,6 @@ export class PostsService {
   }
 
   async update(id: string, updatePostInput: UpdatePostInput) {
-    console.log('HERE');
     const post = await this.postsRepository.preload({
       id,
       ...updatePostInput,

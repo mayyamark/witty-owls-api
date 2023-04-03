@@ -2,6 +2,7 @@ import { Post } from 'src/posts/entities/post.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Reaction } from 'src/reactions/entities/reaction.entity';
 
 @Entity()
 @ObjectType()
@@ -39,4 +40,11 @@ export class User {
     nullable: true,
   })
   comments: Comment[];
+
+  @OneToMany(() => Reaction, (reaction) => reaction.author)
+  @Field(() => [Reaction], {
+    description: 'List of reactions, made by the user',
+    nullable: true,
+  })
+  reactions: Reaction[];
 }

@@ -6,8 +6,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Reaction } from 'src/reactions/entities/reaction.entity';
 
 @Entity()
 @ObjectType()
@@ -37,4 +39,11 @@ export class Comment {
   @JoinColumn({ name: 'postId' })
   @Field(() => Post, { description: 'Post, associated with the comment' })
   post: Post;
+
+  @OneToMany(() => Reaction, (reaction) => reaction.comment)
+  @Field(() => [Reaction], {
+    description: 'List of reactions, associated with the comment',
+    nullable: true,
+  })
+  reactions: Reaction[];
 }
