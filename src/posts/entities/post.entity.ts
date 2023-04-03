@@ -8,6 +8,8 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  UpdateDateColumn,
+  CreateDateColumn,
 } from 'typeorm';
 import { Reaction } from 'src/reactions/entities/reaction.entity';
 
@@ -52,4 +54,19 @@ export class Post {
     nullable: true,
   })
   reactions: Reaction[];
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  @Field(() => Date, { description: 'Date of creation' })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  @Field(() => Date, { description: 'Last updated' })
+  updatedAt: Date;
 }
