@@ -3,8 +3,9 @@ import { CommentsService } from './comments.service';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentInput } from './dto/create-comment.input';
 import { UpdateCommentInput } from './dto/update-comment.input';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { OnlySameUserByIdOrAdminsAllowed } from 'src/auth/interseptors/users.interseptor';
 
 @Resolver(() => Comment)
 export class CommentsResolver {
@@ -28,6 +29,7 @@ export class CommentsResolver {
     return this.commentsService.findOne(id);
   }
 
+  @UseInterceptors(OnlySameUserByIdOrAdminsAllowed)
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Comment)
   updateComment(
@@ -39,6 +41,7 @@ export class CommentsResolver {
     );
   }
 
+  @UseInterceptors(OnlySameUserByIdOrAdminsAllowed)
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Comment)
   removeComment(@Args('id', { type: () => String }) id: string) {

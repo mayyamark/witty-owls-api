@@ -3,8 +3,9 @@ import { ReactionsService } from './reactions.service';
 import { Reaction } from './entities/reaction.entity';
 import { CreateReactionInput } from './dto/create-reaction.input';
 import { UpdateReactionInput } from './dto/update-reaction.input';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { OnlySameUserByIdOrAdminsAllowed } from 'src/auth/interseptors/users.interseptor';
 
 @Resolver(() => Reaction)
 export class ReactionsResolver {
@@ -29,6 +30,7 @@ export class ReactionsResolver {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(OnlySameUserByIdOrAdminsAllowed)
   @Mutation(() => Reaction)
   updateReaction(
     @Args('updateReactionInput') updateReactionInput: UpdateReactionInput,
@@ -40,6 +42,7 @@ export class ReactionsResolver {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(OnlySameUserByIdOrAdminsAllowed)
   @Mutation(() => Reaction)
   removeReaction(@Args('id', { type: () => String }) id: string) {
     return this.reactionsService.remove(id);
