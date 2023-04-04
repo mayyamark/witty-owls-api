@@ -3,11 +3,14 @@ import { CommentsService } from './comments.service';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentInput } from './dto/create-comment.input';
 import { UpdateCommentInput } from './dto/update-comment.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Resolver(() => Comment)
 export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Comment)
   createComment(
     @Args('createCommentInput') createCommentInput: CreateCommentInput,
@@ -25,6 +28,7 @@ export class CommentsResolver {
     return this.commentsService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Comment)
   updateComment(
     @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
@@ -35,6 +39,7 @@ export class CommentsResolver {
     );
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Comment)
   removeComment(@Args('id', { type: () => String }) id: string) {
     return this.commentsService.remove(id);

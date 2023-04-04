@@ -3,6 +3,7 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import * as dotenv from 'dotenv';
+import { JwtStrategy } from './jwt.strategy';
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ dotenv.config();
       signOptions: { expiresIn: '10h' },
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}
