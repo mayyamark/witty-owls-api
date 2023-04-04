@@ -9,6 +9,7 @@ import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { ReactionsModule } from './reactions/reactions.module';
 import * as dotenv from 'dotenv';
+import { AuthModule } from './auth/auth.module';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ dotenv.config();
       autoLoadEntities: true,
       synchronize: true,
     }),
+    AuthModule,
     UsersModule,
     PostsModule,
     CommentsModule,

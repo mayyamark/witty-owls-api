@@ -47,4 +47,8 @@ export class User {
     nullable: true,
   })
   reactions: Reaction[];
+
+  @Column({ nullable: true })
+  @Field(() => String, { description: 'Password of the user', nullable: true })
+  password: string;
 }

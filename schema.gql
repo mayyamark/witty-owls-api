@@ -135,6 +135,11 @@ type User {
   password: String
 }
 
+type LoggedUserOutput {
+  """Generated access token of the user"""
+  accessToken: String!
+}
+
 type Query {
   users: [User!]!
   user(id: String!): User!
@@ -150,6 +155,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: String!): User!
+  loginUser(loginUserInput: LoginUserInput!): LoggedUserOutput!
   createPost(createPostInput: CreatePostInput!): Post!
   updatePost(updatePostInput: UpdatePostInput!): Post!
   removePost(id: String!): Post!
@@ -196,6 +202,14 @@ input UpdateUserInput {
 
   """ID of the user"""
   id: String!
+}
+
+input LoginUserInput {
+  """Email of the user"""
+  email: String!
+
+  """Password of the user"""
+  password: String!
 }
 
 input CreatePostInput {
