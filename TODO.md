@@ -9,9 +9,8 @@
 - [x] Add new reactions resource
 - [x] Add replies to comments
 - [x] Add createdAt and updatedAt fields to all resources
-- [ ] Add authentication
+- [x] Add authentication
 
 ## Bonus:
-- [ ] Setup pgAdmin
+- [x] Setup pgAdmin
 - [ ] Create seed data file
-- [ ] Add image upload
